@@ -1,0 +1,130 @@
+﻿<Window x:Class="WindowsTaskbarAudio.View.CurrentSongDetailsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:valueConverter="clr-namespace:WindowsTaskbarAudio.ValueConverter"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Topmost="True"
+        Left="0"
+        Top="0"
+        Title="CurrentSongDetailsView" Height="350" Width="350">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Themes/Controls.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.Resources>
+            <Style x:Key="SongInfoTextStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                <Setter Property="TextAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="18" />
+            </Style>
+            <Style x:Key="SongSliderInfoTextStyle" TargetType="TextBlock" BasedOn="{StaticResource SongInfoTextStyle}">
+                <Setter Property="FontSize" Value="12" />
+            </Style>
+            <valueConverter:MilisecondsToTimeStringConverter x:Key="milisecondsToTimeStringConverter" />
+            <valueConverter:VolumeValueToImageConverter x:Key="volumeValueToImageConverter" />
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="70*" />
+            <ColumnDefinition Width="20*" />
+            <ColumnDefinition Width="5*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="6.6*" />
+            <RowDefinition Height="6.6*" />
+            <RowDefinition Height="6.6*" />
+            <RowDefinition Height="6.6*" />
+            <RowDefinition Height="6.6*" />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
+        <Image Grid.ColumnSpan="5"
+               Grid.RowSpan="8"
+               Source="{Binding TrackArtUrl}"
+               Stretch="UniformToFill" />
+        <Rectangle Grid.Row="0"
+                   Grid.RowSpan="8"
+                   Grid.ColumnSpan="5">
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0.5, 1"
+                                     EndPoint="0.5, 0">
+                    <GradientStop Color="#2f2f2f"
+                                  Offset="0" />
+                    <GradientStop Color="Transparent"
+                                  Offset="1.3" />
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <TextBlock Grid.Row="2"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="3"
+                   FontWeight="Bold"
+                   Style="{StaticResource SongInfoTextStyle}"
+                   Text="{Binding TrackTitle}" />
+        <TextBlock Grid.Row="3"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="3"
+                   Style="{StaticResource SongInfoTextStyle}"
+                   Text="{Binding TrackArtist}" />
+        <TextBlock Grid.Row="4"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="3"
+                   Style="{StaticResource SongInfoTextStyle}"
+                   Text="{Binding TrackAlbum}" />
+        <Image Grid.Row="5"
+               Grid.Column="1"
+               VerticalAlignment="Center"
+               Source="{Binding Volume, Converter={StaticResource volumeValueToImageConverter}}" />
+        <Slider Grid.Row="5"
+                Grid.Column="2"
+                VerticalAlignment="Center"
+                IsSnapToTickEnabled="True"
+                IsMoveToPointEnabled="True"
+                Value="{Binding Volume}"
+                Maximum="100" />
+        <TextBlock Grid.Row="5"
+                   Grid.Column="3"
+                   TextAlignment="Left"
+                   Style="{StaticResource SongSliderInfoTextStyle}"
+                   Text="{Binding Volume}" />
+        <Image Grid.Row="6"
+               Grid.Column="1"
+               VerticalAlignment="Center"
+               Source="../Resources/Icons/Time-32.png" />
+        <Slider Grid.Row="6"
+                Grid.Column="2"
+                VerticalAlignment="Center"
+                IsMoveToPointEnabled="True"
+                Thumb.DragStarted="TrackTimeDragStarted"
+                Thumb.DragCompleted="Thumb_DragCompleted"
+                Value="{Binding CurrentTrackTime}"
+                Maximum="{Binding TotalTrackTime}" />
+        <TextBlock Grid.Row="6"
+                   Grid.Column="3"
+                   TextAlignment="Left"
+                   Style="{StaticResource SongSliderInfoTextStyle}">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0}/{1}">
+                    <Binding Path="CurrentTrackTime"
+                             Converter="{StaticResource milisecondsToTimeStringConverter}" />
+                    <Binding Path="TotalTrackTime"
+                             Converter="{StaticResource milisecondsToTimeStringConverter}" />
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+    </Grid>
+</Window>
+

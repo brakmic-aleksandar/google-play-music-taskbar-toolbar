@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="WindowsTaskbarAudio.View.CurrentSongView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WindowsTaskbarAudio.View"
+             xmlns:valueConverter="clr-namespace:WindowsTaskbarAudio.ValueConverter"
+             mc:Ignorable="d" 
+             d:DesignHeight="40"
+             Height="40"
+             Width="200"
+             MaxWidth="200"
+             MouseUp="OnMouseUp">
+    <UserControl.Style>
+        <Style TargetType="UserControl">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="Transparent"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseDown">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                                                To="#2a292b" Duration="0:0:0.25"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseUp">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                                                To="Transparent" Duration="0:0:0.25"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#363437"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Style>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <valueConverter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Themes/Controls.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <UserControl.Visibility>
+        <Binding Path="IsVisible" Converter="{StaticResource BoolToVisibilityConverter}" />
+    </UserControl.Visibility>
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="26">
+            <StackPanel.Resources>
+                <valueConverter:BoolToPlayButtonImageConverter x:Key="BoolToPlayButtonImageConverter" />
+            </StackPanel.Resources>
+            <Button Command="{Binding RewindCommand}">
+                <Image Source="../Resources/Icons/Previous-32.png"/>
+            </Button>
+            <Button Command="{Binding PlayPauseCommand}">
+                <Image Source="{Binding IsPlaying, Converter={StaticResource BoolToPlayButtonImageConverter}}"/>
+            </Button>
+            <Button Command="{Binding ForwardCommand}">
+                <Image Source="../Resources/Icons/Next-32.png"/>
+            </Button>
+        </StackPanel>
+        <TextBlock 
+            TextAlignment="Center"
+            Text="{Binding ArtistAndSongName}"/>
+    </StackPanel>
+</UserControl>

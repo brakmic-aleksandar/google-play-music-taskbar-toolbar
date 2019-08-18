@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2047
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsTaskbarAudio", "WindowsTaskbarAudio\WindowsTaskbarAudio.csproj", "{F06D0033-67AC-43AC-8F15-F9867746CB99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GooglePlayMusicDesktop", "GooglePlayMusicDesktop\GooglePlayMusicDesktop.csproj", "{F2264F95-9BAB-489C-A245-A48F72867B84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestContainer", "TestContainer\TestContainer.csproj", "{FACFD9F5-EB70-4363-895E-6D04551EE36B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F06D0033-67AC-43AC-8F15-F9867746CB99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F06D0033-67AC-43AC-8F15-F9867746CB99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F06D0033-67AC-43AC-8F15-F9867746CB99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F06D0033-67AC-43AC-8F15-F9867746CB99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2264F95-9BAB-489C-A245-A48F72867B84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2264F95-9BAB-489C-A245-A48F72867B84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2264F95-9BAB-489C-A245-A48F72867B84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2264F95-9BAB-489C-A245-A48F72867B84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FACFD9F5-EB70-4363-895E-6D04551EE36B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FACFD9F5-EB70-4363-895E-6D04551EE36B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FACFD9F5-EB70-4363-895E-6D04551EE36B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FACFD9F5-EB70-4363-895E-6D04551EE36B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5258D276-1D42-4AB0-81FF-85F98DDAD616}
+	EndGlobalSection
+EndGlobal
